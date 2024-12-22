@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212; /* Dark background */
+    overflow: hidden;
+}
+
+.container {
+    perspective: 1000px;
+}
+
+.cube {
+    width: 400px; /* Increased cube size */
+    height: 400px; /* Increased cube size */
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 80s infinite linear; 
+}
+
+.face {
+    position: absolute;
+    width: 400px; /* Size of each face */
+    height: 400px; /* Size of each face */
+    display: flex;
+    flex-wrap: wrap; /* Ensure emojis tile correctly */
+    justify-content: center;
+    align-items: center;
+    z-index: 1;   overflow: hidden;
+ 
+}
+
+.face .emoji {
+    font-size: 40px; /* Emoji size */
+    width: 50px; /* Size of each emoji */
+    height: 50px; /* Size of each emoji */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px; /* Spacing between emojis */
+    transition: transform 0.1s ease, scale 0.2s ease; /* Smooth transition on hover */
+   transform: scale(2.2); 
+}
+
+/* Hover effect for pressed emoji */
+.face .emoji:hover {
+    transform: scale(0.8); /* "Pressing" effect */
+}
+
+/* Add a "sponge" effect to the surrounding emojis */
+.face .emoji:hover ~ .emoji,
+.face .emoji:hover {
+    transform: scale(1.2); /* Scale the surrounding emojis */
+}
+
+.face .emoji:active {
+    transform: scale(0.75); /* Make the pressed emoji smaller when clicked */
+}
+
+/* Apply transformations to each face of the cube */
+.front  { transform: translateZ(200px); }
+.back   { transform: rotateY(180deg) translateZ(200px); }
+.left   { transform: rotateY(-90deg) translateZ(200px); }
+.right  { transform: rotateY(90deg) translateZ(200px); }
+.top    { transform: rotateX(90deg) translateZ(200px); }
+.bottom { transform: rotateX(-90deg) translateZ(200px); }
+
+@keyframes rotateCube {
+    0% { transform: rotateX(0) rotateY(0); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+button {
+    position: absolute;
+    top: 20px;
+    font-size: 1em;
+    padding: 10px 20px;
+    background-color: #ff79c6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ff92e1;
+}
